@@ -87,8 +87,8 @@ export class MHttp {
       userAuth[AppConstant.ACCESS_TOKEN] = accessToken;
       userAuth[AppConstant.CLIENT] = client;
       userAuth[AppConstant.UID] = uid;
-    }
-    response.userAuth = userAuth;
+      response.userAuth = userAuth;
+    }    
 
     return response;
   }

@@ -9,7 +9,7 @@ import { AuthGuard } from '../helper/auth.guard';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  // canActivate: [AuthGuard],
+  canActivate: [AuthGuard],
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
@@ -44,6 +44,7 @@ const routes: Routes = [{
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class PagesRoutingModule {
 }

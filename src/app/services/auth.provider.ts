@@ -24,7 +24,7 @@ export class AuthProvider extends NbAbstractAuthProvider {
     return this.userService.signIn(user.email, user.password)
     .map((res: any) => {
       this.userService.saveUserAccessTokenToLocalStorage(res.userAuth);
-      return new NbAuthResult(true, res, '/pages/dashboard', false, `Sign in successful!`, null);
+      return new NbAuthResult(true, res, '/dashboard', false, `Sign in successful!`, null);
     })
     .catch((res) => {
       console.log(res);
