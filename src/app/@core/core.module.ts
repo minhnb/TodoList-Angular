@@ -6,12 +6,16 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 
+import { MHttp } from '../services/mHttp';
+import { UserService } from '../services/user';
+import { AuthProvider } from '../services/auth.provider';
+
 const NB_CORE_PROVIDERS = [
   ...DataModule.forRoot().providers,
   ...NbAuthModule.forRoot({
     providers: {
       email: {
-        service: NbDummyAuthProvider,
+        service: AuthProvider,
         config: {
           delay: 3000,
           login: {
@@ -22,6 +26,9 @@ const NB_CORE_PROVIDERS = [
     },
   }).providers,
   AnalyticsService,
+  MHttp,
+  UserService,
+  AuthProvider
 ];
 
 @NgModule({
