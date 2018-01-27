@@ -24,6 +24,7 @@ const routes: Routes = [
       {
         path: 'login',
         component: NbLoginComponent,
+        canActivate: [AuthLoggedIn]
       },
       {
         path: 'register',

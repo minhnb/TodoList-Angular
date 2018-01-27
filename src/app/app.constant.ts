@@ -30,5 +30,9 @@ export const AppConstant = {
     REPONSE_STATUS: {
       ERROR: 'error',
       SUCCESS: 'success'
+    },
+    ENV: {
+      DEV: 'dev',
+      PROD: 'prod'
     }
 };

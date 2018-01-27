@@ -8,7 +8,6 @@ import { AppConstant } from '../app.constant';
 @Injectable()
 export class UserService {
 	private userUrl = AppConfig.API_URL + 'auth';
-	errorWrongUserNameOrPassword: any;
 
 	constructor(private mHttp: MHttp) { }
 

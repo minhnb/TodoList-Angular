@@ -9,10 +9,11 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/toPromise';
 import { AppConstant } from '../app.constant';
 import { AppConfig } from '../app.config';
+import { MSpinner } from '../helper/mSpinner';
 
 @Injectable()
 export class MHttp {
-  constructor(private http: Http, private router: Router) { }
+  constructor(private http: Http, private spinner: MSpinner, router: Router) { }
 
   private getRequestOptions(method: string | RequestMethod, needAuthorization: boolean = true): RequestOptions {
     let headerParams = {};
@@ -62,7 +63,7 @@ export class MHttp {
       }
       options.search = search;
     }
-    // this.spinner.show();
+    this.spinner.showSpinner();
     let self = this;
     return this.http.request(url, options)
       .map(this.extractData.bind(this))
@@ -72,10 +73,12 @@ export class MHttp {
   }
 
   extractData(res: Response) {
-        // this.spinner.hide();
-    console.log(res);
+    this.spinner.hideSpinner();
+    if (AppConfig.ENV != AppConstant.ENV.PROD) {
+      console.log(res);
+    }
     let headers = res.headers;
-    let response = res.json().data || {};
+    let response = res.json().data || res.json() || {};
     if (localStorage.getItem(AppConstant.ACCESS_TOKEN)) {
       return response;
     }
@@ -88,20 +91,22 @@ export class MHttp {
       userAuth[AppConstant.CLIENT] = client;
       userAuth[AppConstant.UID] = uid;
       response.userAuth = userAuth;
-    }    
+    }
 
     return response;
   }
 
   handleError(error: Response | any, url: string, options: RequestOptions): any {
+    this.spinner.hideSpinner();
+    if (AppConfig.ENV != AppConstant.ENV.PROD) {
+      console.log(error);
+    }
     let errMsg = this.jsonError(error);
-    // this.spinner.hide();
     return Observable.throw(errMsg);
   }
 
   jsonError(error: Response | any): any {
     let errMsg: any;
-    console.log(error);
     if (error instanceof Response) {
       if (error.status == 0) {
         let message = 'Connection Error';

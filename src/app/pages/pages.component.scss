@@ -1,0 +1,29 @@
+@import '../@theme/styles/themes';
+
+.menu-button.menu-item {
+  display: block;
+  margin: 30px -1.25rem -1.25rem;
+  border-bottom: 1px solid transparent;
+  font-family: Exo;
+  font-size: 1rem;
+  font-weight: 500;
+  a {
+    display: flex;
+    color: inherit;
+    text-decoration: none;
+    align-items: center;
+    padding: 0.25rem 1rem 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      color: white;
+    }
+
+    .menu-icon {
+      font-size: 2.5rem;
+      width: 2.5rem;
+      margin: 0 0.5rem 0 0;
+      text-align: center;
+    }
+  }
+}
