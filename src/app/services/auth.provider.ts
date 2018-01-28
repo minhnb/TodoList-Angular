@@ -11,6 +11,7 @@ import { UserService } from './user';
 export interface UserData {
   email: string;
   password: string;
+  fullName: string;
 }
 
 @Injectable()
@@ -27,15 +28,23 @@ export class AuthProvider extends NbAbstractAuthProvider {
       return new NbAuthResult(true, res, '/dashboard', false, `Sign in successful!`, null);
     })
     .catch((res) => {
-      console.log(res);
       let errors = [res.message];
 
       return Observable.of(new NbAuthResult(false, res, null, errors));
     });
   }
 
-  register(data?: UserData): Observable<NbAuthResult> {
-    throw new Error('Method not implemented.');
+  register(data: UserData): Observable<NbAuthResult> {
+    data.name = data.fullName;
+    return this.userService.signUp(data)
+    .map((res: any) => {
+      return new NbAuthResult(true, res, '/auth/login', false, `Sign up successful!`, null);
+    })
+    .catch((res) => {
+      let errors = [res.message];
+
+      return Observable.of(new NbAuthResult(false, res, null, errors));
+    });
   }
   requestPassword(data?: UserData): Observable<NbAuthResult> {
     throw new Error('Method not implemented.');

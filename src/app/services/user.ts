@@ -35,7 +35,7 @@ export class UserService {
 	}
 
 	signUp(user: Object): Observable<any> {
-        return this.mHttp.post(this.userUrl, user);
+    return this.mHttp.post(this.userUrl, user);
 	}
 
   signOut(): Observable<any> {
