@@ -5,6 +5,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 
+import { ToDoListModule } from './to-do-list/to-do-list.module';
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -14,6 +16,7 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
+    ToDoListModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,

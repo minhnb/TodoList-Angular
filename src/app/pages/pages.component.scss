@@ -27,3 +27,12 @@
     }
   }
 }
+
+nb-sidebar.compacted .menu-button.menu-item {
+  a {
+    justify-content: center;
+    span {
+      display: none;
+    }
+  }
+}

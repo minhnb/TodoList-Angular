@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>{{ getListName() }}</nb-card-header>
+
+  <nb-card-body>
+    <div class="table-responsive">
+      <table class="table">
+        <tr *ngFor="let item of toDos">
+          <td>
+            <div><nb-checkbox [value]="item.done" (change)=toggleToDoResult()>{{ item.name }}</nb-checkbox></div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </nb-card-body>
+</nb-card>

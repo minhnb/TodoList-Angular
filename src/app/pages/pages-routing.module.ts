@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ToDoListComponent } from './to-do-list/to-do-list.component';
 
 import { AuthGuard } from '../helper/auth.guard';
 
@@ -13,6 +14,9 @@ const routes: Routes = [{
   children: [{
     path: 'dashboard',
     component: DashboardComponent,
+  }, {
+    path: 'todo/:listId',
+    component: ToDoListComponent,
   }, {
     path: '',
     redirectTo: 'dashboard',

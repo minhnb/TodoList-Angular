@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, Injector, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../base.component';
 
 import { MENU_ITEMS } from './pages-menu';
@@ -7,9 +7,9 @@ import { ToDoService } from '../services/todo';
 
 @Component({
   selector: 'ngx-pages',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './pages.component.html',
-    styleUrls: ['./pages.component.scss'],
-  providers: [ToDoService]
+  styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent extends BaseComponent {
 
@@ -30,6 +30,7 @@ export class PagesComponent extends BaseComponent {
   loadListToDo() {
     this.toDoService.getList().subscribe(
       res => {
+        this.dataShare.listToDoMap = {};
         res.forEach(item => {
           this.addAToDoListToMenu(item);
         });
@@ -47,5 +48,6 @@ export class PagesComponent extends BaseComponent {
       link: '/todo/' + listToDoItem.id
     };
     this.menu.push(menuItem);
+    this.dataShare.listToDoMap[listToDoItem.id] = this.menu[this.menu.length - 1];
   }
 }

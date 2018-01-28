@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MHttp } from './services/mHttp';
 import { UserService } from './services/user';
+import { ToDoService } from './services/todo';
 import { AuthProvider } from './services/auth.provider';
 import { MSpinner } from './helper/mSpinner';
 import { MAlertModule } from './helper/mAlert';
@@ -36,6 +37,7 @@ import { DataShare } from './helper/data.share';
     { provide: APP_BASE_HREF, useValue: '/' },
     MHttp,
     UserService,
+    ToDoService,
     AuthProvider,
     MSpinner,
     DataShare
