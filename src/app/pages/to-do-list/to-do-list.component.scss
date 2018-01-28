@@ -1,0 +1,55 @@
+@import '../../@theme/styles/themes';
+
+to-do-list {
+  .to-do {
+    padding-right: 50px;
+    padding-left: 50px;
+    position: relative;
+
+    nb-checkbox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      height: 100%;
+    }
+
+    input.form-control, input.form-control:hover, input.form-control:focus, input.form-control:active {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    a.action {
+      display: block;
+      width: 50px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      font-size: 2em;
+      cursor: pointer;
+    }
+  }
+  .button-add {
+    display: block;
+    padding: 10px 0;
+    margin-top: 10px;
+    a {
+      color: inherit;
+      text-decoration: none;
+      align-items: center;
+      display: flex;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+      i {
+        font-size: 2rem;
+      }
+    }
+  }
+}

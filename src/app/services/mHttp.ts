@@ -73,13 +73,14 @@ export class MHttp {
   }
 
   extractData(res: Response) {
-    this.spinner.hideSpinner();
-    if (AppConfig.ENV != AppConstant.ENV.PROD) {
-      console.log(res);
-    }
+    this.spinner.hideSpinner();  
     let headers = res.headers;
-    let response = res.json().data || res.json() || {};
+    let response = res.json();
+    response = response ? (response.data ? response.data : response) : {};
     if (localStorage.getItem(AppConstant.ACCESS_TOKEN)) {
+      if (AppConfig.ENV != AppConstant.ENV.PROD) {
+        console.log(response);
+      }
       return response;
     }
     let userAuth = {};

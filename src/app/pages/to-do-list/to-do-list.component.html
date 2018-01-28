@@ -2,14 +2,28 @@
   <nb-card-header>{{ getListName() }}</nb-card-header>
 
   <nb-card-body>
-    <div class="table-responsive">
+    <div class="table-responsive" id="list_todo_{{ listId }}">
       <table class="table">
-        <tr *ngFor="let item of toDos">
+        <tr *ngFor="let item of toDos; let i = index">
           <td>
-            <div><nb-checkbox [value]="item.done" (change)=toggleToDoResult()>{{ item.name }}</nb-checkbox></div>
+            <div class="to-do">
+              <nb-checkbox [value]="item.done" (change)=toggleToDoResult(item)></nb-checkbox>
+              <form class="inline-form" (ngSubmit)="updateAToDo(item)">
+                <div class="input-group">
+                  <input type="text" placeholder="Name" class="form-control" (blur)="updateAToDo(item)" [(ngModel)]="item.name" [ngModelOptions]="{standalone: true}"/>
+                </div>
+              </form>
+              <a class="action delete" title="Delete" (click)="deleteAtoDo(item.id, i)"><i class="nb-trash"></i></a>
+            </div>
           </td>
         </tr>
       </table>
+    </div>
+
+    <div class="button-add">
+      <a title="Add a to-do" (click)="createAToDo()">
+        <i class="nb-plus"></i> <span>Add a to-do</span>
+      </a>
     </div>
 
   </nb-card-body>

@@ -58,11 +58,16 @@ export class MAlert {
 
   constructor(private modalService: NgbModal) { }
 
-  showModal(message: string, title: string) {
+  showModal(message: string, title: string, buttonOKAction?: () => void, buttonCancelAction?: () => void, buttonOKTitle?: string, buttonCancelTitle?: string) {
     const activeModal = this.modalService.open(MAlertComponent, { size: 'lg', container: 'nb-layout' });
 
     activeModal.componentInstance.modalHeader = title;
     activeModal.componentInstance.modalContent = message;
+    if (buttonOKAction) activeModal.componentInstance.modalButtonOk.action = buttonOKAction;
+    if (buttonCancelAction) {
+      activeModal.componentInstance.modalButtonCancel.action = buttonCancelAction;
+      activeModal.componentInstance.modalButtonCancel.display = true;
+    }
   }
 
   showError(message: string, title?: string) {
@@ -71,6 +76,10 @@ export class MAlert {
 
   showInfo(message: string, title?: string) {
     this.showModal(message, title || 'Info');
+  }
+
+  showConfirm(message: string, buttonOKAction: () => void, title?: string) {
+    this.showModal(message, title || 'Confirmation', buttonOKAction, () => {});
   }
 }
 
