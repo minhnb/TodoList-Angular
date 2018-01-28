@@ -16,4 +16,10 @@ export class BaseComponent {
 		this.alert = injector.get(MAlert);
 		this.dataShare = injector.get(DataShare);
 	}
+
+	sortListById(list: Array<any>) {
+		list.sort((a, b) => {
+      return a.id - b.id;
+    });
+	}
 }

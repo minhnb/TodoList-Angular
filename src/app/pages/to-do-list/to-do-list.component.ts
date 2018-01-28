@@ -35,12 +35,6 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
     return this.dataShare.listToDoMap[this.listId].title;
   }
 
-  sortListToDo() {
-    this.toDos.sort((a, b) => {
-      return a.id - b.id;
-    });
-  }
-
   updateBackup(item: any) {
     this.toDosBackup[item.id] = Object.assign({}, item);
   }
@@ -55,7 +49,7 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
     this.toDoService.getAllToDosByListId(this.listId).subscribe(
       res => {
         this.toDos = res;
-        this.sortListToDo();
+        this.sortListById(this.toDos);
         this.createToDoBackup();
         this.listName = this.getListName();
       },

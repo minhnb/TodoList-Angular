@@ -1,7 +1,7 @@
 <ngx-sample-layout>
   <nb-menu [items]="menu"></nb-menu>
   <div class="menu-button menu-item">
-    <a title="New List" href="#">
+    <a title="New List" (click)="createNewToDoList()">
       <i class="menu-icon nb-plus"></i> <span class="menu-title">New List</span>
     </a>
   </div>
