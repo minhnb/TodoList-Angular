@@ -1,5 +1,10 @@
 <nb-card>
-  <nb-card-header>{{ getListName() }}</nb-card-header>
+  <nb-card-header>
+    <form class="inline-form" (ngSubmit)="updateListName()">
+      <div class="input-group">
+        <input type="text" placeholder="Name" class="form-control" (blur)="updateListName()" [(ngModel)]="listName" [ngModelOptions]="{standalone: true}" />
+      </div>
+    </form>  </nb-card-header>
 
   <nb-card-body>
     <div class="table-responsive" id="list_todo_{{ listId }}">

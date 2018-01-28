@@ -23,7 +23,7 @@ export class ToDoService {
 		return this.mHttp.get(this.toDoListUrl);
 	}
 
-	editList(id: string): Observable<any> {
+	editList(id: string, name: string): Observable<any> {
 		let toDoList = {
 			name: name
 		};

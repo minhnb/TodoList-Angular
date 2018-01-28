@@ -24,7 +24,6 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
 			this.listId = params['listId'];
-      this.listName = this.getListName();
       this.getAllToDosOfCurrentList();
 		});
   }
@@ -58,6 +57,7 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
         this.toDos = res;
         this.sortListToDo();
         this.createToDoBackup();
+        this.listName = this.getListName();
       },
       err => {
         this.alert.showError(err.message);
@@ -123,4 +123,17 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
     return false;
   }
 
+  updateListName() {
+    if (this.listName != this.dataShare.listToDoMap[this.listId].title) {
+      this.toDoService.editList(this.listId, this.listName).subscribe(
+        res => {
+          this.dataShare.listToDoMap[this.listId].title = res.name;
+          this.listName = this.getListName();
+        },
+        err => {
+          this.alert.showError(err);
+        }
+      )
+    }
+  }
 }
