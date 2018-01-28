@@ -4,6 +4,8 @@ import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 
+import { DataShare } from '../../../helper/data.share';
+
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
@@ -21,12 +23,13 @@ export class HeaderComponent implements OnInit {
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,
-              private analyticsService: AnalyticsService) {
+              private analyticsService: AnalyticsService, private dataShare: DataShare) {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    // this.userService.getUsers()
+    //   .subscribe((users: any) => this.user = users.nick);
+    this.user = this.dataShare.user;
   }
 
   toggleSidebar(): boolean {

@@ -4,4 +4,8 @@ import { Injectable } from '@angular/core';
 export class DataShare {
   listToDoMap: any = {};
   menu: Array<any> = [];
+  user: any = {
+    name: '',
+    picture: ''
+  };
 }

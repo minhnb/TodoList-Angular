@@ -1,5 +1,6 @@
 import { Component, Injector, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../base.component';
+import { AppConstant } from '../app.constant';
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -17,12 +18,17 @@ export class PagesComponent extends BaseComponent {
     super(injector);
     this.initMenu();
     this.loadListToDo();
+    this.initUser();
   }
 
   initMenu() {
     MENU_ITEMS.forEach(item => {
       this.dataShare.menu.push(item);
     });
+  }
+
+  initUser() {
+    this.dataShare.user.name = localStorage.getItem(AppConstant.UID);
   }
 
   loadListToDo() {
