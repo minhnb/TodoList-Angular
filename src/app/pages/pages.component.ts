@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { BaseComponent } from '../base.component';
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -10,11 +11,12 @@ import { ToDoService } from '../services/todo';
     styleUrls: ['./pages.component.scss'],
   providers: [ToDoService]
 })
-export class PagesComponent {
+export class PagesComponent extends BaseComponent {
 
   menu: Array<any> = [];
 
-  constructor(private toDoService: ToDoService) {
+  constructor(private injector: Injector, private toDoService: ToDoService) {
+    super(injector);
     this.initMenu();
     this.loadListToDo();
   }
@@ -33,7 +35,7 @@ export class PagesComponent {
         });
       },
       err => {
-
+        this.alert.showError(err.message);
       }
     )
   }

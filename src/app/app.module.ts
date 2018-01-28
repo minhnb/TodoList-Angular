@@ -14,6 +14,8 @@ import { MHttp } from './services/mHttp';
 import { UserService } from './services/user';
 import { AuthProvider } from './services/auth.provider';
 import { MSpinner } from './helper/mSpinner';
+import { MAlertModule } from './helper/mAlert';
+import { DataShare } from './helper/data.share';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +28,8 @@ import { MSpinner } from './helper/mSpinner';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+
+    MAlertModule
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -33,7 +37,8 @@ import { MSpinner } from './helper/mSpinner';
     MHttp,
     UserService,
     AuthProvider,
-    MSpinner
+    MSpinner,
+    DataShare
   ],
 })
 export class AppModule {
