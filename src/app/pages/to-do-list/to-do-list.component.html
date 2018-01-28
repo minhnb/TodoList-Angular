@@ -1,10 +1,14 @@
 <nb-card>
   <nb-card-header>
-    <form class="inline-form" (ngSubmit)="updateListName()">
-      <div class="input-group">
-        <input type="text" placeholder="Name" class="form-control" (blur)="updateListName()" [(ngModel)]="listName" [ngModelOptions]="{standalone: true}" />
-      </div>
-    </form>  </nb-card-header>
+    <div class="to-do">
+      <form class="inline-form" (ngSubmit)="updateListName()">
+        <div class="input-group">
+          <input type="text" placeholder="Name" class="form-control" (blur)="updateListName()" [(ngModel)]="listName" [ngModelOptions]="{standalone: true}" />
+        </div>
+      </form>
+      <a class="action delete" title="Delete" (click)="deleteList()"><i class="nb-trash"></i></a>
+    </div>
+  </nb-card-header>
 
   <nb-card-body>
     <div class="table-responsive" id="list_todo_{{ listId }}">
@@ -18,7 +22,7 @@
                   <input type="text" placeholder="Name" class="form-control" (blur)="updateAToDo(item)" [(ngModel)]="item.name" [ngModelOptions]="{standalone: true}"/>
                 </div>
               </form>
-              <a class="action delete" title="Delete" (click)="deleteAtoDo(item.id, i)"><i class="nb-trash"></i></a>
+              <a class="action delete" title="Delete" (click)="deleteAtoDo(item.id, i)"><i class="nb-close"></i></a>
             </div>
           </td>
         </tr>

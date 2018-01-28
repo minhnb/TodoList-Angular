@@ -66,7 +66,7 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
         this.updateBackup(res);
       },
       err => {
-        this.alert.showError(err);
+        this.alert.showError(err.message);
       }
     );
   }
@@ -93,7 +93,7 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
           this.toDos.splice(index, 1);
         },
         err => {
-          this.alert.showError(err);
+          this.alert.showError(err.message);
         }
       );
     });
@@ -125,9 +125,48 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
           this.listName = this.getListName();
         },
         err => {
-          this.alert.showError(err);
+          this.alert.showError(err.message);
         }
       )
     }
+  }
+
+  deleteList() {
+    this.alert.showConfirm('Are you sure you want to delete this list?', () => {
+      this.toDoService.deleteList(this.listId).subscribe(
+        res => {
+          let menuIndex = this.findMenuIndexOfCurrentList();
+          let nextIndex = this.getNextMenuIndex(menuIndex);
+          this.dataShare.menu.splice(menuIndex, 1);
+          if (nextIndex >= 0) {
+            let nextMenuItem = this.dataShare.menu[nextIndex];
+            this.router.navigate([nextMenuItem.link]);
+          } else {
+            this.router.navigate(['/dashboard']);
+          }
+        },
+        err => {
+          this.alert.showError(err.message);
+        }
+      );
+    });
+  }
+
+  findMenuIndexOfCurrentList() {
+    let menu = this.dataShare.menu;
+    for (let i = 0; i < menu.length; i++) {
+      if (menu[i].listId == this.listId) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  getNextMenuIndex(currentMenuIndex: number) {
+    let nextIndex = currentMenuIndex;
+    if (currentMenuIndex == this.dataShare.menu.length - 1) {
+      nextIndex--;
+    }
+    return nextIndex;
   }
 }

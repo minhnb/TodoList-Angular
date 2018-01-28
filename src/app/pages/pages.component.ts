@@ -1,6 +1,5 @@
 import { Component, Injector, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../base.component';
-import { Router } from '@angular/router';
 
 import { MENU_ITEMS } from './pages-menu';
 
@@ -14,9 +13,7 @@ import { ToDoService } from '../services/todo';
 })
 export class PagesComponent extends BaseComponent {
 
-  menu: Array<any> = [];
-
-  constructor(private injector: Injector, private router: Router, private toDoService: ToDoService) {
+  constructor(private injector: Injector, private toDoService: ToDoService) {
     super(injector);
     this.initMenu();
     this.loadListToDo();
@@ -24,7 +21,7 @@ export class PagesComponent extends BaseComponent {
 
   initMenu() {
     MENU_ITEMS.forEach(item => {
-      this.menu.push(item);
+      this.dataShare.menu.push(item);
     });
   }
 
@@ -47,10 +44,11 @@ export class PagesComponent extends BaseComponent {
     let menuItem = {
       title: listToDoItem.name,
       icon: 'nb-list',
-      link: '/todo/' + listToDoItem.id
+      link: '/todo/' + listToDoItem.id,
+      listId: listToDoItem.id
     };
-    this.menu.push(menuItem);
-    this.dataShare.listToDoMap[listToDoItem.id] = this.menu[this.menu.length - 1];
+    this.dataShare.menu.push(menuItem);
+    this.dataShare.listToDoMap[listToDoItem.id] = this.dataShare.menu[this.dataShare.menu.length - 1];
   }
 
   createNewToDoList() {

@@ -8,7 +8,7 @@ to-do-list {
       padding: 0;
     }
   }
-    
+
   .to-do {
     padding-right: 50px;
     padding-left: 50px;
@@ -52,6 +52,12 @@ to-do-list {
       i {
         font-size: 2rem;
       }
+    }
+  }
+
+  nb-card-header {
+    .to-do {
+      padding-left: 0;
     }
   }
 }

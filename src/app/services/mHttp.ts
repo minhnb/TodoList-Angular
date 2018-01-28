@@ -73,7 +73,7 @@ export class MHttp {
   }
 
   extractData(res: Response) {
-    this.spinner.hideSpinner();  
+    this.spinner.hideSpinner();
     let headers = res.headers;
     let response = res.json();
     response = response ? (response.data ? response.data : response) : {};
@@ -107,7 +107,7 @@ export class MHttp {
   }
 
   jsonError(error: Response | any): any {
-    let errMsg: any;
+    let errMsg: any = {};
     if (error instanceof Response) {
       if (error.status == 0) {
         let message = 'Connection Error';
@@ -117,8 +117,10 @@ export class MHttp {
         }
       } else {
         let errorJson = error.json();
-        errMsg = errorJson.errors;
-        errMsg.message = errMsg.full_messages || errMsg[0];
+        if (errorJson.errors) {
+          errorJson = errorJson.errors;
+        }
+        errMsg.message = errorJson ? (errorJson.full_messages || errorJson[0] || errorJson.error) : 'Unknown Error';
       }
     } else {
       errMsg = {
