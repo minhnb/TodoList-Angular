@@ -7,3 +7,8 @@
 ### Test account:
 
 minhnb89@gmail.com/12345678
+
+### Running features
+- Sign up, Sign in
+- CRUD a to-do list
+- CRUD a to-do in list
