@@ -35,8 +35,8 @@ export class AuthProvider extends NbAbstractAuthProvider {
   }
 
   register(data: UserData): Observable<NbAuthResult> {
-    data.name = data.fullName;
-    return this.userService.signUp(data)
+    let userData: any = data;
+    return this.userService.signUp(userData)
     .map((res: any) => {
       return new NbAuthResult(true, res, '/auth/login', false, `Sign up successful!`, null);
     })

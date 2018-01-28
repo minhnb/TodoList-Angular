@@ -13,7 +13,7 @@
   <nb-card-body>
     <div class="table-responsive" id="list_todo_{{ listId }}">
       <table class="table">
-        <tr *ngFor="let item of toDos; let i = index">
+        <tr *ngFor="let item of toDos | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
           <td>
             <div class="to-do">
               <nb-checkbox [value]="item.done" (change)=toggleToDoResult(item)></nb-checkbox>
@@ -27,8 +27,8 @@
           </td>
         </tr>
       </table>
+      <pagination-controls (pageChange)="currentPage = $event" maxSize="7" directionLinks="true" autoHide="true" previousLabel="" nextLabel=""></pagination-controls>
     </div>
-
     <div class="button-add">
       <a title="Add a to-do" (click)="createAToDo()">
         <i class="nb-plus"></i> <span>Add a to-do</span>

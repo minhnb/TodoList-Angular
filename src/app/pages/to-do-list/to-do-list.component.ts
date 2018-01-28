@@ -16,6 +16,8 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
   toDos: Array<any> = [];
   toDosBackup: any = {};
   private sub: any;
+  currentPage: number;
+  itemsPerPage: number = 10;
 
   constructor(private injector: Injector, private route: ActivatedRoute, private toDoService: ToDoService) {
     super(injector);
@@ -59,10 +61,15 @@ export class ToDoListComponent extends BaseComponent implements OnInit {
     )
   }
 
+  goToLastPage() {
+    this.currentPage = Math.floor(this.toDos.length/this.itemsPerPage) + 1;
+  }
+
   createAToDo() {
     this.toDoService.addAToDoToList(this.listId, '').subscribe(
       res => {
         this.toDos.push(res);
+        this.goToLastPage();
         this.updateBackup(res);
       },
       err => {
