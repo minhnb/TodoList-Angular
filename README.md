@@ -12,3 +12,8 @@ minhnb89@gmail.com/12345678
 - Sign up, Sign in
 - CRUD a to-do list
 - CRUD a to-do in list
+
+###Install & Run:
+- npm install
+- npm start
+- http://localhost:4200
